@@ -13,5 +13,17 @@ services:
       MYSQL_USER: "root"
       MYSQL_PASSWORD: "password"
 
+  mq-service:
+    image: rabbitmq:3-management-alpine
+    ports:
+      - 15672:15672
+      - 5672:5672
+    environment:
+      RABBITMQ_DEFAULT_USER: "test"
+      RABBITMQ_DEFAULT_PASS: "password"
+    volumes:
+      - rabbitmq-data:/var/lib/rabbitmq
+
 volumes:
   mysql:
+  rabbitmq-data:
