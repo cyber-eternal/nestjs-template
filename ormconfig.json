@@ -1,0 +1,22 @@
+{
+  "name": "default",
+  "type": "mariadb",
+  "host": "localhost",
+  "username": "guest",
+  "password": "guest",
+  "database": "docmodule",
+  "port": 3306,
+  "logging": true,
+  "entities": [
+    "src/**/*.entity.ts"
+  ],
+  "migrations": [
+    "migrations/*.ts"
+  ],
+  "migrationsRun": true,
+  "synchronize": false,
+  "cli": {
+    "entitiesDir": "src",
+    "migrationsDir": "migrations"
+  }
+}
