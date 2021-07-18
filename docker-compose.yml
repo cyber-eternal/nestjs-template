@@ -23,6 +23,19 @@ services:
       RABBITMQ_DEFAULT_PASS: "password"
     volumes:
       - rabbitmq-data:/var/lib/rabbitmq
+      
+  api:
+    build: .
+    container_name: api
+    tty: true
+    command: yarn start
+    ports:
+      - ${APP_PORT}:3000
+    volumes:
+      - ./:/usr/app
+      - ./node_modules:/usr/app/node_modules
+    depends_on:
+      - mysql-db
 
 volumes:
   mysql:
