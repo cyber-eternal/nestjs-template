@@ -74,7 +74,7 @@ $ docker-compose up -d
 
 ## Stay in touch
 
-- Author - [Edgar Sargsyan](https://github.com/cyber-eternal)
+- Author - [Cyber-Eternal](https://github.com/cyber-eternal)
 - Website - [https://cyber-eternal.github.io/](https://cyber-eternal.github.io/)
 
 ## License
