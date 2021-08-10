@@ -2,7 +2,9 @@ import { Injectable, Logger, NestMiddleware } from '@nestjs/common';
 import { Response, NextFunction } from 'express';
 import * as JWT from 'jsonwebtoken';
 import { IRequestWithUser } from '../interfaces/requrest-with-user.interface';
-import { IKeycloakUser } from '../interfaces/keycloak-user.interface';
+import { ConfigService } from '@nestjs/config';
+import { KeycloakUserFromToken } from '@app/common/classes/keycloak-user.class';
+import { IKeycloakTokenData } from '@app/common/interfaces/keycloak-token-data.interface';
 
 const AUTH_HEADER = 'authorization';
 const BEARER_AUTH_SCHEME = 'Bearer';
@@ -13,26 +15,12 @@ const tokenFromBearer = (scheme: string, headerValue: string): string => {
     : headerValue;
 };
 
-const tokenDataToUser = (tokenData) => {
-  return {
-    email_verified: tokenData.email_verified,
-    name: tokenData.name,
-    preferred_username: tokenData.preferred_username,
-    given_name: tokenData.given_name,
-    family_name: tokenData.family_name,
-    email: tokenData.email,
-    realm_access: tokenData.realm_access,
-    resource_access: tokenData.resource_access,
-    keycloakId: tokenData.sub,
-    customerIds: [].concat(tokenData.customerId || 11), // TODO: workaround until we have customer assigned in keycloak
-    clientCodes: [].concat(tokenData.clientCode),
-  } as IKeycloakUser;
-};
-
 const unixToMilliseconds = (time: number) => time * 1000;
 
 @Injectable()
 export class AuthUserMiddleware implements NestMiddleware {
+  constructor(private configService: ConfigService) {}
+
   private readonly logger = new Logger(AuthUserMiddleware.name);
   async use(req: IRequestWithUser, res: Response, next: NextFunction) {
     const headerValue = req.headers && req.headers[AUTH_HEADER];
@@ -46,7 +34,7 @@ export class AuthUserMiddleware implements NestMiddleware {
       return next();
     }
 
-    const tokenData: any = JWT.decode(token);
+    const tokenData: IKeycloakTokenData = JWT.decode(token);
     const now = +new Date();
     const expiredAt = unixToMilliseconds(tokenData.exp);
     const notValidBefore = unixToMilliseconds(tokenData.nbf);
@@ -61,7 +49,10 @@ export class AuthUserMiddleware implements NestMiddleware {
       return next();
     }
 
-    req.user = tokenDataToUser(tokenData);
+    req.user = new KeycloakUserFromToken(
+      tokenData,
+      this.configService.get<string>('app.keycloakClientId'),
+    );
 
     next();
   }

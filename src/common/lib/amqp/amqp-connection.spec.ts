@@ -1,4 +1,3 @@
-// @ts-ignore
 import amqpConnection from './amqp-connection';
 
 it('is a function', () => {

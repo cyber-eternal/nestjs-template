@@ -1,0 +1,6 @@
+{
+  "moduleNameMapper": {
+    "^@root/(.*)$": "<rootDir>/$1",
+    "^@app/(.*)$": "<rootDir>/src/$1"
+  }
+}

@@ -1,7 +1,6 @@
 import * as Amqp from 'amqplib';
-import * as R from 'ramda';
 import { Injectable } from '@nestjs/common';
-import { ConfigService } from 'nestjs-config';
+import { ConfigService } from '@nestjs/config';
 import amqpConnection from './amqp-connection';
 
 @Injectable()
@@ -18,14 +17,11 @@ export class AmqpService {
     );
   }
 
-  public async publishToQueue(queueName: string, data: object): Promise<void> {
+  public async publishToQueue(queueName: string, data: any): Promise<void> {
     const channel = await this.connection.createChannel();
     await channel.assertQueue(queueName);
 
-    const buffer = R.pipe(
-      JSON.stringify,
-      Buffer.from,
-    )(data);
+    const buffer = Buffer.from(JSON.stringify(data));
     channel.sendToQueue(queueName, buffer);
   }
 }

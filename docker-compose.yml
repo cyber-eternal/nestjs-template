@@ -1,17 +1,35 @@
-version: "3.0"
+version: '3.8'
+
 services:
-  mysql-db:
-    image: mariadb:10.4
-    restart: "always"
+  mariadb:
+    image: mariadb
+    restart: 'no'
     volumes:
-      - mysql:/var/lib/mysql
+      - mariadb-data:/var/lib/mariadb
     ports:
       - 3306:3306
     environment:
-      MYSQL_RANDOM_ROOT_PASSWORD: "yes"
-      MYSQL_DATABASE: "core"
-      MYSQL_USER: "root"
-      MYSQL_PASSWORD: "password"
+      MYSQL_RANDOM_ROOT_PASSWORD: yes
+      MYSQL_DATABASE: core
+      MYSQL_USER: guest
+      MYSQL_PASSWORD: guest
+
+  adminer:
+    image: adminer
+    ports:
+      - 8081:8080
+    environment:
+      ADMINER_DEFAULT_DB_DRIVER: mysql
+      ADMINER_DEFAULT_DB_HOST: mariadb
+      ADMINER_DEFAULT_DB_SERVER: mariadb
+      ADMINER_DEFAULT_SERVER: mariadb
+      ADMINER_DEFAULT_DB_NAME: core
+      ADMINER_DESIGN: dracula
+      ADMINER_PLUGINS: tables-filter tinymce
+    expose:
+      - 8081
+    depends_on:
+      - mariadb
 
   mq-service:
     image: rabbitmq:3-management-alpine
@@ -19,24 +37,35 @@ services:
       - 15672:15672
       - 5672:5672
     environment:
-      RABBITMQ_DEFAULT_USER: "test"
-      RABBITMQ_DEFAULT_PASS: "password"
+      RABBITMQ_DEFAULT_USER: 'test'
+      RABBITMQ_DEFAULT_PASS: 'password'
     volumes:
       - rabbitmq-data:/var/lib/rabbitmq
-      
+
   api:
     build: .
     container_name: api
-    tty: true
-    command: yarn start
     ports:
-      - ${APP_PORT}:3000
+      - 3000:3000
+    expose:
+      - 3000
     volumes:
-      - ./:/usr/app
-      - ./node_modules:/usr/app/node_modules
+      - api-data:/var/lib/api
+    env_file: .env
     depends_on:
-      - mysql-db
+      - mq-service
+      - mariadb
+    environment:
+      NODE_ENV: 'development'
+      APP_PORT: 3000
+      TYPEORM_HOST: mariadb
+      REDIS_HOST: redis
+      AMQP_HOST: mq-service
 
 volumes:
-  mysql:
+  mariadb-data:
+    driver: local
   rabbitmq-data:
+    driver: local
+  api-data:
+    driver: local

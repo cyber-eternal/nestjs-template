@@ -1,10 +1,9 @@
 import { BadRequestException, Injectable, Logger } from '@nestjs/common';
 import * as Amqp from 'amqplib';
 import { Observable, Subscriber } from 'rxjs';
-import { safeJsonParse } from '@app/utils/json';
+import { safeJsonParse } from '@app/common/utils/json';
 import amqpConnection from './amqp-connection';
 import { validate } from 'class-validator';
-import * as R from 'ramda';
 
 const [PUBLISH, DRAFT, UPDATE, DELETE] = [
   'PUBLISH',
@@ -125,9 +124,9 @@ export abstract class AMQPController {
     return queueName + '.' + ERROR_QUEUE_KEY;
   }
 
-  private publishToQueue(queueName: string, data: object): void {
+  private publishToQueue(queueName: string, data: any): void {
     try {
-      const buffer = R.pipe(JSON.stringify, Buffer.from)(data);
+      const buffer = Buffer.from(JSON.stringify(data));
       this.channel.sendToQueue(queueName, buffer);
     } catch (error) {
       Logger.log(error);

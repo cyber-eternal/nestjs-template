@@ -1,13 +1,12 @@
-
 <p align="center">
   <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo_text.svg" width="320" alt="Nest Logo" /></a>
 </p>
 
-# Template for the [Node.js](http://nodejs.org) applications based on the  [Nest.js](http://nestjs.org) framework for building efficient and scalable server-side applications.
+# Template for the [Node.js](http://nodejs.org) applications based on the [Nest.js](http://nestjs.org) framework for building efficient and scalable server-side applications.
 
 ## Description
 
-The template is based on Nest.js and TypeScript. Also has an implementation for the TypeORM to work with the Database, and RabbitMQ for the messaging(the RabbitMQ implementation can be easily removed if you are not using it). The template dockerized as well
+The template is based on Nest.js(v 8.0.5) and TypeScript. Also has an implementation for the TypeORM to work with the Database, and RabbitMQ for the messaging(the RabbitMQ implementation can be easily removed if you are not using it). The template dockerized as well
 
 ## Configurations
 
@@ -72,6 +71,14 @@ $ docker-compose up
 $ docker-compose up -d
 ```
 
+## Adminer
+
+to manage the MariaDB will be available on http://localhost:8081/
+
+## Swagger UI
+
+http://localhost:3001/api/doc
+
 ## Stay in touch
 
 - Author - [Cyber-Eternal](https://github.com/cyber-eternal)
@@ -79,5 +86,4 @@ $ docker-compose up -d
 
 ## License
 
-  Nest is [MIT licensed](https://github.com/cyber-eternal/nestjs-template/blob/master/LICENSE).
-  
+Nest is [MIT licensed](https://github.com/cyber-eternal/nestjs-template/blob/master/LICENSE).
