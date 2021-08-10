@@ -5,13 +5,25 @@
     "removeComments": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "target": "es6",
+    "allowSyntheticDefaultImports": true,
+    "target": "es2017",
     "sourceMap": true,
     "outDir": "./dist",
     "baseUrl": "./",
+    "incremental": true,
+    "skipLibCheck": true,
     "paths": {
-      "@app/*" : ["./src/*"]
+      "@app/*": [
+        "./src/*"
+      ],
+      "@root/*": [
+        "./*"
+      ]
     }
   },
-  "exclude": ["node_modules", "coverage"]
+  "linterOptions": {
+    "exclude": [
+      "migrations/**"
+    ]
+  }
 }
