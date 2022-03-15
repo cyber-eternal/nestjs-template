@@ -1,6 +1,7 @@
 import { NestFactory, HttpAdapterHost } from '@nestjs/core';
 import * as helmet from 'helmet';
 import * as rateLimit from 'express-rate-limit';
+import { Logger } from '@nestjs/common';
 import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
 import { setupSwagger } from './bootstrap/setup-swagger';
@@ -12,6 +13,10 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   const configService = app.get(ConfigService);
   const { httpAdapter } = app.get(HttpAdapterHost);
+
+  const corsConfig = app.get<ConfigService>(ConfigService).get('cors');
+  Logger.log(`Applying cors config: ${JSON.stringify(corsConfig)}`);
+  app.enableCors(corsConfig);
 
   app.setGlobalPrefix('api');
 
@@ -47,3 +52,13 @@ async function bootstrap() {
 }
 
 bootstrap();
+
+process.on('unhandledRejection', (reason, p) => {
+  // tslint:disable-next-line:no-console
+  console.log(
+    'possibly Unhandled Rejection at: Promise ',
+    p,
+    ' | reason: ',
+    reason,
+  );
+});

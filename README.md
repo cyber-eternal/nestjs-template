@@ -6,7 +6,7 @@
 
 ## Description
 
-The template is based on Nest.js(v 8.0.5) and TypeScript. Also has an implementation for the TypeORM to work with the Database, and RabbitMQ for the messaging(the RabbitMQ implementation can be easily removed if you are not using it). The template dockerized as well
+The template is based on Nest.js(v 8.4.1) and TypeScript. Also has an implementation for the TypeORM to work with the Database, and RabbitMQ for the messaging(the RabbitMQ implementation can be easily removed if you are not using it). The template dockerized as well
 
 ## Configurations
 
@@ -15,6 +15,8 @@ The all configurations are in the `./config` folder. The existing configs
 - app.ts - Application configs, like port, host, env and so one
 - database.ts - The database and TypeORM configurations
 - amqp.ts - RabbitMQ configuration
+- swagger.ts - Swagger configuration
+- cors.ts - Cors configuration
 
 ## Dependencies installation
 

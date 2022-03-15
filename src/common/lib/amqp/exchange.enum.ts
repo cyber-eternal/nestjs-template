@@ -1,3 +1,3 @@
 export enum Exchange {
-  document = 'testExchange',
+  test = 'test',
 }
