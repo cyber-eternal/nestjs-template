@@ -9,12 +9,14 @@ import { AuthUserMiddleware } from '@app/common/middlewares/auth-user.middleware
 import { BootstrapTypeormModule } from './bootstrap/typeorm.module';
 import { ConfigService } from '@nestjs/config';
 import { PingModule } from './modules/ping/ping.module';
+// import { BootstrapRedisModule } from './bootstrap/redis.module';
 // import { BootstrapGraphqlModule } from './bootstrap/graphql.module';
 
 @Module({
   imports: [
     BootstrapConfigModule,
     BootstrapTypeormModule,
+    // BootstrapRedisModule, // <-- For Redis
     // BootstrapGraphqlModule, // <-- For GraphQL
     PingModule,
   ],

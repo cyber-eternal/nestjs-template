@@ -4,7 +4,7 @@
   "host": "localhost",
   "username": "guest",
   "password": "guest",
-  "database": "docmodule",
+  "database": "core",
   "port": 3306,
   "logging": true,
   "entities": [
