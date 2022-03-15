@@ -2,6 +2,7 @@ version: '3.8'
 
 services:
   mariadb:
+    container_name: mariadb
     image: mariadb
     restart: 'no'
     volumes:
@@ -9,12 +10,13 @@ services:
     ports:
       - 3306:3306
     environment:
-      MYSQL_RANDOM_ROOT_PASSWORD: yes
+      MYSQL_RANDOM_ROOT_PASSWORD: 'yes'
       MYSQL_DATABASE: core
       MYSQL_USER: guest
       MYSQL_PASSWORD: guest
 
   adminer:
+    container_name: adminer
     image: adminer
     ports:
       - 8081:8080
@@ -32,6 +34,7 @@ services:
       - mariadb
 
   mq-service:
+    container_name: mq-service
     image: rabbitmq:3-management-alpine
     ports:
       - 15672:15672
@@ -43,8 +46,8 @@ services:
       - rabbitmq-data:/var/lib/rabbitmq
 
   api:
-    build: .
     container_name: api
+    build: .
     ports:
       - 3000:3000
     expose:

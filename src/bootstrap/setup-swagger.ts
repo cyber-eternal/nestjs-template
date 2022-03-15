@@ -7,8 +7,9 @@ export const setupSwagger = (app: INestApplication) => {
   const configService = app.get(ConfigService);
 
   if (configService.get<string>('NODE_ENV') === 'development') {
-    const swaggerPath = configService.get<string>('app.swaggerPath');
-    const swaggerHost = configService.get<string>('app.swaggerHost');
+    const swaggerPath = configService.get<string>('swagger.swaggerPath');
+    const swaggerHost = configService.get<string>('swagger.swaggerHost');
+    const version = configService.get<string>('app.version');
 
     app.use(swaggerPath, (req: Request, res: Response, next: NextFunction) => {
       // A temporary solution to prevent security issues with query params
@@ -25,7 +26,7 @@ export const setupSwagger = (app: INestApplication) => {
       new DocumentBuilder()
         .setTitle('API')
         .setDescription('API')
-        .setVersion('1.0')
+        .setVersion(version)
         .addBearerAuth()
         .addServer(swaggerHost)
         .build(),
