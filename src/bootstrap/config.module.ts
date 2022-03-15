@@ -7,6 +7,7 @@ import configs from '@root/config';
   imports: [
     ConfigModule.forRoot({
       load: [configs],
+      isGlobal: true,
       validationSchema: schema,
       validationOptions: {
         allowUnknown: true,

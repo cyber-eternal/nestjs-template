@@ -16,7 +16,7 @@
     "TYPEORM_HOST": "localhost",
     "TYPEORM_USERNAME": "guest",
     "TYPEORM_PASSWORD": "guest",
-    "TYPEORM_DATABASE": "docmodule",
+    "TYPEORM_DATABASE": "core",
     "TYPEORM_PORT": 3306,
     "AMQP_HOST": "localhost",
     "AMQP_USERNAME": "onsweb-docs",
