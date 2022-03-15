@@ -3,4 +3,6 @@ export default async () => ({
   amqp: (await import('./amqp')).default,
   database: (await import('./database')).default,
   swagger: (await import('./swagger')).default,
+  cors: (await import('./cors')).default,
+  redis: (await import('./redis')).default,
 });
