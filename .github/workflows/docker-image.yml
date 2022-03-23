@@ -18,5 +18,5 @@ jobs:
     - name: Check docker-compose
       run: docker -v && docker-compose -v
     
-#     - name: Build the Docker images
-#       run: docker-compose up -d --build
+    - name: Build the Docker images
+      run: docker-compose up -d --build
