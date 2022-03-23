@@ -12,7 +12,7 @@
     "APP_PORT": 3001,
     "TYPEORM_MIGRATIONS_RUN": true,
     "TYPEORM_LOGGING": true,
-    "TYPEORM_TYPE": "mysql",
+    "TYPEORM_TYPE": "mariadb",
     "TYPEORM_HOST": "localhost",
     "TYPEORM_USERNAME": "guest",
     "TYPEORM_PASSWORD": "guest",

@@ -54,7 +54,6 @@ services:
       - 3000
     volumes:
       - api-data:/var/lib/api
-    env_file: .env
     depends_on:
       - mq-service
       - mariadb
@@ -64,6 +63,13 @@ services:
       TYPEORM_HOST: mariadb
       REDIS_HOST: redis
       AMQP_HOST: mq-service
+      AMQP_USERNAME: test
+      AMQP_PASSWORD: password
+      TYPEORM_USERNAME: guest
+      TYPEORM_PASSWORD: guest
+      TYPEORM_DATABASE: core
+      REDIS_PASSWORD: sOmE_sEcUrE_pAsS
+      
 
   redis:
     image: 'redis:alpine'

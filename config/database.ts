@@ -1,6 +1,6 @@
 export default {
   name: 'default',
-  type: process.env.TYPEORM_TYPE || 'mysql',
+  type: process.env.TYPEORM_TYPE || 'mariadb',
   host: process.env.TYPEORM_HOST || 'localhost',
   username: process.env.TYPEORM_USERNAME || 'root',
   password: process.env.TYPEORM_PASSWORD || 'password',
