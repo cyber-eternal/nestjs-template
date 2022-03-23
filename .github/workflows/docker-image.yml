@@ -1,0 +1,22 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    
+    - name: Clone repo
+      uses: actions/checkout@v2
+      
+    - name: Check docker-compose
+      run: docker -v && docker-compose -v
+    
+#     - name: Build the Docker images
+#       run: docker-compose up -d --build
