@@ -10,8 +10,8 @@ export class PingDto {
   @IsString()
   readonly version: string;
 
-  constructor() {
+  constructor(version: string) {
     this.api = true;
-    this.version = 'N/A'; // TODO: set VERSION
+    this.version = version;
   }
 }
