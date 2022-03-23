@@ -5,7 +5,7 @@
 # Template for the [Node.js](http://nodejs.org) applications based on the [Nest.js](http://nestjs.org) framework for building efficient and scalable server-side applications.
 
 ### Status of Last Deployment:
-![Last Deployment](https://github.com/cyber-eternal/nestjs-template/workflows/build/badge.svg?branch=master)
+![Last Deployment](https://github.com/cyber-eternal/nestjs-template/workflows/Nestjs-Template-CI/badge.svg?branch=master)
 
 ## Description
 
