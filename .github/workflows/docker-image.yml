@@ -19,7 +19,7 @@ jobs:
         run: docker-compose up -d --build
 
       - name: Run e2e
-        run: yarn test:e2e
+        run: yarn && yarn test:e2e
 
       - name: Down Docker-Compose containers
         run: docker-compose down
