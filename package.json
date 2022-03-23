@@ -1,7 +1,7 @@
 {
   "name": "nestjs-template",
-  "version": "3.0.0",
-  "template-version": "3.0.0",
+  "version": "3.0.1",
+  "template-version": "3.0.1",
   "description": "Nest.js based template",
   "author": "cyber-eternal",
   "license": "MIT",

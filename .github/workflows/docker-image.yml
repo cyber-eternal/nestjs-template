@@ -1,22 +1,25 @@
-name: Docker Image CI
+name: Nestjs-Template-CI
 
 on:
   push:
-    branches: [ master ]
+    branches: [master]
 
 jobs:
-
   build:
-
     runs-on: ubuntu-latest
 
     steps:
-    
-    - name: Clone repo
-      uses: actions/checkout@v2
-      
-    - name: Check docker-compose
-      run: docker -v && docker-compose -v
-    
-    - name: Build the Docker images
-      run: docker-compose up -d --build
+      - name: Clone repo
+        uses: actions/checkout@v2
+
+      - name: Check docker-compose
+        run: docker -v && docker-compose -v
+
+      - name: Up Docker-Compose containers
+        run: docker-compose up -d --build
+
+      - name: Run e2e
+        run: yarn test:e2e
+
+      - name: Down Docker-Compose containers
+        run: docker-compose down

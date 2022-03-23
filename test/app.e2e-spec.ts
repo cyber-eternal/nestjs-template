@@ -1,6 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import * as request from 'supertest';
-import { AppModule } from '../src/modules/app/app.module';
+import { AppModule } from '../src/app.module';
+import { Connection } from 'typeorm/index';
 
 describe('AppController (e2e)', () => {
   let app;
@@ -14,10 +15,12 @@ describe('AppController (e2e)', () => {
     await app.init();
   });
 
-  it('/ (GET)', () => {
-    return request(app.getHttpServer())
-      .get('/')
-      .expect(200)
-      .expect('Hello World!');
+  it('/ping (GET)', () => {
+    return request(app.getHttpServer()).get('/ping').expect(200);
+  });
+
+  afterAll(async () => {
+    const conn = app.get(Connection);
+    await conn.close();
   });
 });
