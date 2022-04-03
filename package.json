@@ -60,6 +60,8 @@
     "url-join": "^4.0.1"
   },
   "devDependencies": {
+    "@commitlint/cli": "^16.2.3",
+    "@commitlint/config-conventional": "^16.2.1",
     "@nestjs/cli": "^8.2.3",
     "@nestjs/schematics": "^8.0.8",
     "@nestjs/testing": "^8.4.1",
@@ -78,6 +80,7 @@
     "eslint-plugin-jsdoc": "^35.5.0",
     "eslint-plugin-prefer-arrow": "^1.2.3",
     "eslint-plugin-prettier": "^3.4.0",
+    "husky": "^7.0.4",
     "jest": "27.0.6",
     "jest-json-schema": "^5.0.0",
     "nodemon": "^2.0.12",
@@ -105,5 +108,10 @@
     ],
     "coverageDirectory": "../coverage",
     "testEnvironment": "node"
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
   }
 }
