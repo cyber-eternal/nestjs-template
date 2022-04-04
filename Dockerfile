@@ -6,6 +6,7 @@ FROM node:14 AS node_base
 FROM node_base as deps
 WORKDIR /usr/app
 COPY package.json yarn.lock ./
+RUN npm config delete registry
 RUN yarn install --frozen-lockfile && yarn cache clean
 
 ## Run app for DEV env
