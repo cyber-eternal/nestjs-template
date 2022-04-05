@@ -87,7 +87,7 @@ http://localhost:3001/api/doc
 ## Stay in touch
 
 - Author - [Cyber-Eternal](https://github.com/cyber-eternal)
-- Website - [www.sargsyan.dev](www.sargsyan.dev)
+- Website - sargsyan.dev
 
 ## License
 
