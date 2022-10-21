@@ -6,18 +6,20 @@ import {
 } from '@nestjs/common';
 import { BootstrapConfigModule } from '@app/bootstrap/config.module';
 import { AuthUserMiddleware } from '@app/common/middlewares/auth-user.middleware';
-import { BootstrapTypeormModule } from './bootstrap/typeorm.module';
+import { BootstrapTypeormModule } from '@app/bootstrap/typeorm.module';
 import { ConfigService } from '@nestjs/config';
-import { PingModule } from './modules/ping/ping.module';
-// import { BootstrapRedisModule } from './bootstrap/redis.module';
-// import { BootstrapGraphqlModule } from './bootstrap/graphql.module';
+import { PingModule } from '@app/modules/ping/ping.module';
+// import { AwsModule } from './modules/aws/aws.module';
+// import { BootstrapRedisModule } from '@app/bootstrap/redis.module';
+// import { BootstrapGraphqlModule } from '@app/bootstrap/graphql.module';
 
 @Module({
   imports: [
     BootstrapConfigModule,
-    BootstrapTypeormModule,
+    BootstrapTypeormModule, // <-- For TypeORM
     // BootstrapRedisModule, // <-- For Redis
     // BootstrapGraphqlModule, // <-- For GraphQL
+    // AwsModule, // <-- For AWS
     PingModule,
   ],
   providers: [ConfigService],

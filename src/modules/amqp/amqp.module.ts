@@ -1,9 +1,8 @@
 import { Module } from '@nestjs/common';
 import { AmqpProvider } from '@app/modules/amqp/amqp.provider';
-import { DocumentModule } from '@app/modules/document/document.module';
 
 @Module({
-  imports: [DocumentModule],
+  imports: [],
   providers: [AmqpProvider],
   exports: [AmqpProvider],
 })

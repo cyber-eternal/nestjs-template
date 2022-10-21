@@ -9,7 +9,7 @@
 
 ## Description
 
-The template is based on Nest.js(v 8.4.1) and TypeScript. Also has an implementation for the TypeORM to work with the Database, and RabbitMQ for the messaging(the RabbitMQ implementation can be easily removed if you are not using it). The template dockerized as well
+The template is based on Nest.js(v9) and TypeScript. Also has an implementation for the TypeORM to work with the Database, and RabbitMQ for the messaging(the RabbitMQ implementation can be easily removed if you are not using it). The template dockerized as well
 
 ## Configurations
 

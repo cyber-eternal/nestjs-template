@@ -11,8 +11,10 @@ describe('asyncCacheAndRetry()', () => {
   });
   it('is a high order function', () => {
     expect(asyncCacheAndRetry).toEqual(expect.any(Function));
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     expect(asyncCacheAndRetry()).toEqual(expect.any(Function));
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     expect(asyncCacheAndRetry()()).toEqual(expect.any(Function));
   });

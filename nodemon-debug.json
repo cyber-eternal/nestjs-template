@@ -9,18 +9,6 @@
   "exec": "node --inspect=0.0.0.0:9229 -r ts-node/register -r tsconfig-paths/register src/main.ts",
   "env": {
     "NODE_ENV": "development",
-    "APP_PORT": 3001,
-    "TYPEORM_MIGRATIONS_RUN": true,
-    "TYPEORM_LOGGING": true,
-    "TYPEORM_TYPE": "mariadb",
-    "TYPEORM_HOST": "localhost",
-    "TYPEORM_USERNAME": "guest",
-    "TYPEORM_PASSWORD": "guest",
-    "TYPEORM_DATABASE": "core",
-    "TYPEORM_PORT": 3306,
-    "AMQP_HOST": "localhost",
-    "AMQP_USERNAME": "onsweb-docs",
-    "AMQP_PASSWORD": "password",
-    "KEYCLOAK_CLIENT_ID": "portal-api"
+    "APP_PORT": 3001
   }
 }
