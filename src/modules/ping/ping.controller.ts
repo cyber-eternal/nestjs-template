@@ -14,7 +14,6 @@ export class PingController {
   @ApiOkResponse({ status: HttpStatus.OK, type: PingDto })
   public ping(): PingDto {
     const dto = new PingDto(this.configService.get<string>('app.version'));
-    console.log('PingDto: ', dto);
     return dto;
   }
 }

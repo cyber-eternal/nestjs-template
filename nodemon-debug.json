@@ -7,8 +7,5 @@
     "src/**/*.spec.ts"
   ],
   "exec": "node --inspect=0.0.0.0:9229 -r ts-node/register -r tsconfig-paths/register src/main.ts",
-  "env": {
-    "NODE_ENV": "development",
-    "APP_PORT": 3001
-  }
+  "env": {}
 }
