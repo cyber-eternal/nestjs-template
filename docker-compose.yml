@@ -1,33 +1,33 @@
-version: '3.8'
+version: "3.9"
 
 services:
   mariadb:
-    container_name: mariadb-${NODE_ENV}
+    container_name: mariadb
     image: mariadb
     restart: 'no'
     volumes:
       - mariadb-data:/var/lib/mariadb
     ports:
-      - ${TYPEORM_PORT}:${TYPEORM_PORT}
+      - 3306:3306
     environment:
       MYSQL_RANDOM_ROOT_PASSWORD: 'yes'
-      MYSQL_DATABASE: ${TYPEORM_DATABASE}
-      MYSQL_USER: ${TYPEORM_USERNAME}
-      MYSQL_PASSWORD: ${TYPEORM_PASSWORD}
+      MYSQL_DATABASE: core
+      MYSQL_USER: guest
+      MYSQL_PASSWORD: guest
 
   adminer:
-    container_name: adminer-${NODE_ENV}
+    container_name: adminer
     image: adminer
     env_file:
       - .env
     ports:
       - 8081:8080
     environment:
-      ADMINER_DEFAULT_DB_DRIVER: ${TYPEORM_TYPE}
+      ADMINER_DEFAULT_DB_DRIVER: mysql
       ADMINER_DEFAULT_DB_HOST: mariadb
       ADMINER_DEFAULT_DB_SERVER: mariadb
       ADMINER_DEFAULT_SERVER: mariadb
-      ADMINER_DEFAULT_DB_NAME: ${TYPEORM_DATABASE}
+      ADMINER_DEFAULT_DB_NAME: core
       ADMINER_DESIGN: dracula
       ADMINER_PLUGINS: tables-filter tinymce
     expose:
@@ -36,7 +36,7 @@ services:
       - mariadb
 
   mq-service:
-    container_name: mq-service-${NODE_ENV}
+    container_name: mq-service
     image: rabbitmq:3-management-alpine
     env_file:
       - .env
@@ -44,22 +44,22 @@ services:
       - 15672:15672
       - 5672:5672
     environment:
-      RABBITMQ_DEFAULT_USER: ${AMQP_USERNAME}
-      RABBITMQ_DEFAULT_PASS: ${AMQP_PASSWORD}
+      RABBITMQ_DEFAULT_USER: test
+      RABBITMQ_DEFAULT_PASS: test
     volumes:
       - rabbitmq-data:/var/lib/rabbitmq
 
   api:
-    container_name: api-${NODE_ENV}
+    container_name: api
     build:
       context: .
       dockerfile: Dockerfile
     env_file:
       - .env
     ports:
-      - ${APP_PORT}:${APP_PORT}
+      - 3000:3000
     expose:
-      - ${APP_PORT}
+      - 3000
     depends_on:
       - mq-service
       - mariadb
@@ -70,7 +70,7 @@ services:
   redis:
     image: 'redis:alpine'
     container_name: redis-cache
-    command: redis-server --requirepass ${REDIS_PASSWORD}
+    command: redis-server --requirepass sOmE_sEcUrE_pAsS
     ports:
       - 6379:6379
     env_file:

@@ -1,9 +1,8 @@
 import { join } from 'path';
-import { DataSourceOptions } from 'typeorm';
 
 export default {
   name: process.env.TYPEORM_DATABASE,
-  type: process.env.TYPEORM_TYPE,
+  type: 'mysql',
   host: process.env.TYPEORM_HOST,
   username: process.env.TYPEORM_USERNAME,
   password: process.env.TYPEORM_PASSWORD,
@@ -19,4 +18,4 @@ export default {
     entitiesDir: 'src',
     migrationsDir: 'migrations',
   },
-} as DataSourceOptions;
+};
