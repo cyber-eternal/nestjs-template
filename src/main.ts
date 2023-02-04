@@ -1,57 +1,20 @@
-import { NestFactory, HttpAdapterHost } from '@nestjs/core';
-import * as helmet from 'helmet';
-import * as rateLimit from 'express-rate-limit';
-import { Logger } from '@nestjs/common';
-import { AppModule } from './app.module';
-import { ValidationPipe } from '@nestjs/common';
-import { setupSwagger } from './bootstrap/setup-swagger';
+import { AppModule } from '@app/app.module';
+import { setupSwagger } from '@app/bootstrap/swagger.module';
+import setBaseMiddlewares from '@app/common/middlewares/base.middlewares';
 import { ConfigService } from '@nestjs/config';
-import { AllExceptionFilter } from './common/filters/all-exception.filter';
-import { json, urlencoded } from 'express';
+import { NestFactory } from '@nestjs/core';
+import 'reflect-metadata';
 
-async function bootstrap() {
+(async () => {
   const app = await NestFactory.create(AppModule);
   const configService = app.get(ConfigService);
-  const { httpAdapter } = app.get(HttpAdapterHost);
+  app.setGlobalPrefix('api/v1');
 
-  const corsConfig = app.get<ConfigService>(ConfigService).get('cors');
-  Logger.log(`Applying cors config: ${JSON.stringify(corsConfig)}`);
-  app.enableCors(corsConfig);
-
-  app.setGlobalPrefix('api');
-
-  app.use(json({ limit: '15mb' })); //For JSON requests
-  app.use(
-    urlencoded({
-      extended: true,
-    }),
-  );
-
-  app.use(helmet());
-
-  app.enableCors();
-
-  app.use(
-    rateLimit({
-      windowMs: 15 * 60 * 1000, // 15 minutes
-      max: configService.get('MAX_RATE_LIMIT') || 100, // limit each IP to 100 requests per windowMs
-    }),
-  );
-
-  app.useGlobalFilters(new AllExceptionFilter(httpAdapter));
-
-  app.useGlobalPipes(
-    new ValidationPipe({
-      transform: true,
-    }),
-  );
-
+  setBaseMiddlewares(app);
   setupSwagger(app);
 
   await app.listen(configService.get<number>('app.port'));
-}
-
-bootstrap();
+})();
 
 process.on('unhandledRejection', (reason, p) => {
   // tslint:disable-next-line:no-console

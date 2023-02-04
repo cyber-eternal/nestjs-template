@@ -1,4 +1,4 @@
-version: '3.8'
+version: "3.9"
 
 services:
   mariadb:
@@ -40,36 +40,26 @@ services:
       - 15672:15672
       - 5672:5672
     environment:
-      RABBITMQ_DEFAULT_USER: 'test'
-      RABBITMQ_DEFAULT_PASS: 'password'
+      RABBITMQ_DEFAULT_USER: test
+      RABBITMQ_DEFAULT_PASS: test
     volumes:
       - rabbitmq-data:/var/lib/rabbitmq
 
   api:
     container_name: api
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile
     ports:
       - 3000:3000
     expose:
       - 3000
-    volumes:
-      - api-data:/var/lib/api
     depends_on:
       - mq-service
       - mariadb
-    environment:
-      NODE_ENV: 'development'
-      APP_PORT: 3000
-      TYPEORM_HOST: mariadb
-      REDIS_HOST: redis
-      AMQP_HOST: mq-service
-      AMQP_USERNAME: test
-      AMQP_PASSWORD: password
-      TYPEORM_USERNAME: guest
-      TYPEORM_PASSWORD: guest
-      TYPEORM_DATABASE: core
-      REDIS_PASSWORD: sOmE_sEcUrE_pAsS
-      
+    volumes:
+      - api-data:/var/lib/api
+    restart: always
 
   redis:
     image: 'redis:alpine'
@@ -81,7 +71,7 @@ services:
       - redis-data:/var/lib/redis
       - redis.conf:/usr/local/etc/redis/redis.conf
     environment:
-      - REDIS_REPLICATION_MODE=master      
+      - REDIS_REPLICATION_MODE=master
 
 volumes:
   mariadb-data:

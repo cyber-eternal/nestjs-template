@@ -1,7 +1,7 @@
 import { Injectable, Logger, NestMiddleware } from '@nestjs/common';
 import { Response, NextFunction } from 'express';
 import * as JWT from 'jsonwebtoken';
-import { IRequestWithUser } from '../interfaces/requrest-with-user.interface';
+import { IRequestWithUser } from '@app/common/interfaces/requrest-with-user.interface';
 import { ConfigService } from '@nestjs/config';
 import { KeycloakUserFromToken } from '@app/common/classes/keycloak-user.class';
 import { IKeycloakTokenData } from '@app/common/interfaces/keycloak-token-data.interface';

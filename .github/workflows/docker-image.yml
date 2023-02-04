@@ -2,7 +2,7 @@ name: Nestjs-Template-CI
 
 on:
   push:
-    branches: [master]
+    branches: [master, develop]
 
 jobs:
   build:
@@ -10,7 +10,7 @@ jobs:
 
     steps:
       - name: Clone repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Check docker-compose
         run: docker -v && docker-compose -v

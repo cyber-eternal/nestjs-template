@@ -20,7 +20,7 @@ const ERROR_QUEUE_KEY = 'error';
 export abstract class AMQPController {
   private connection: Amqp.Connection;
   private channel: Amqp.Channel;
-  private queueListener;
+  private queueListener: any;
 
   protected constructor(
     // protected readonly emailService: EmailService,
@@ -47,7 +47,7 @@ export abstract class AMQPController {
       [UPDATE]: this.handleUpdate.bind(this),
       [DELETE]: this.handleDraft.bind(this),
     };
-    this.queueListener.subscribe(async (message) => {
+    this.queueListener.subscribe(async (message: any) => {
       const content = safeJsonParse(message.content.toString());
       const { type, payload } = content || {
         type: undefined,
@@ -134,15 +134,15 @@ export abstract class AMQPController {
     }
   }
 
-  protected async handlePublish(payload) {
+  protected async handlePublish(payload: any) {
     throw new Error('Not Implemented');
   }
 
-  protected async handleDraft(payload) {
+  protected async handleDraft(payload: any) {
     throw new Error('Not Implemented');
   }
 
-  protected async handleUpdate(payload) {
+  protected async handleUpdate(payload: any) {
     throw new Error('Not Implemented');
   }
 

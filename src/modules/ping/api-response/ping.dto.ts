@@ -10,8 +10,18 @@ export class PingDto {
   @IsString()
   readonly version: string;
 
+  @ApiProperty()
+  @IsString()
+  readonly env: string;
+
+  @ApiProperty()
+  @IsString()
+  readonly dateTime: Date;
+
   constructor(version: string) {
     this.api = true;
     this.version = version;
+    this.env = process.env.NODE_ENV;
+    this.dateTime = new Date();
   }
 }
