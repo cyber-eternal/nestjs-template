@@ -2,11 +2,11 @@ import { join } from 'path';
 
 export default {
   name: process.env.TYPEORM_DATABASE,
-  type: 'mysql',
-  host: process.env.TYPEORM_HOST,
-  username: process.env.TYPEORM_USERNAME,
-  password: process.env.TYPEORM_PASSWORD,
-  database: process.env.TYPEORM_DATABASE,
+  type: process.env.TYPEORM_TYPE || 'mariadb',
+  host: process.env.TYPEORM_HOST || 'localhost',
+  username: process.env.TYPEORM_USERNAME || 'guest',
+  password: process.env.TYPEORM_PASSWORD || 'guest',
+  database: process.env.TYPEORM_DATABASE || 'core',
   port: parseInt(process.env.TYPEORM_PORT) || 3306,
   logging: process.env.TYPEORM_LOGGING === 'true',
   entities: [join(__dirname, '..', '**', '*.entity.{ts,js}')],
