@@ -4,9 +4,12 @@
 
 # Template for the [Node.js](http://nodejs.org) applications based on the [Nest.js](http://nestjs.org) framework for building efficient and scalable server-side applications.
 
+### Status of Last Deployment:
+![Last Deployment](https://github.com/cyber-eternal/nestjs-template/workflows/Nestjs-Template-CI/badge.svg?branch=master)
+
 ## Description
 
-The template is based on Nest.js(v 8.4.1) and TypeScript. Also has an implementation for the TypeORM to work with the Database, and RabbitMQ for the messaging(the RabbitMQ implementation can be easily removed if you are not using it). The template dockerized as well
+The template is based on Nest.js(v9) and TypeScript. Also has an implementation for the TypeORM to work with the Database, and RabbitMQ for the messaging(the RabbitMQ implementation can be easily removed if you are not using it). The template dockerized as well
 
 ## Configurations
 
@@ -83,8 +86,8 @@ http://localhost:3001/api/doc
 
 ## Stay in touch
 
-- Author - [Cyber-Eternal](https://github.com/cyber-eternal)
-- Website - [https://cyber-eternal.github.io/](https://cyber-eternal.github.io/)
+- Author - [Edgar Sargsyan](https://github.com/cyber-eternal)
+- Website - https://www.sargsyan.dev/
 
 ## License
 

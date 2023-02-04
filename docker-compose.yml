@@ -1,4 +1,4 @@
-version: '3.8'
+version: "3.9"
 
 services:
   mariadb:
@@ -18,6 +18,8 @@ services:
   adminer:
     container_name: adminer
     image: adminer
+    env_file:
+      - .env
     ports:
       - 8081:8080
     environment:
@@ -36,34 +38,34 @@ services:
   mq-service:
     container_name: mq-service
     image: rabbitmq:3-management-alpine
+    env_file:
+      - .env
     ports:
       - 15672:15672
       - 5672:5672
     environment:
-      RABBITMQ_DEFAULT_USER: 'test'
-      RABBITMQ_DEFAULT_PASS: 'password'
+      RABBITMQ_DEFAULT_USER: test
+      RABBITMQ_DEFAULT_PASS: test
     volumes:
       - rabbitmq-data:/var/lib/rabbitmq
 
   api:
     container_name: api
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile
+    env_file:
+      - .env
     ports:
       - 3000:3000
     expose:
       - 3000
-    volumes:
-      - api-data:/var/lib/api
-    env_file: .env
     depends_on:
       - mq-service
       - mariadb
-    environment:
-      NODE_ENV: 'development'
-      APP_PORT: 3000
-      TYPEORM_HOST: mariadb
-      REDIS_HOST: redis
-      AMQP_HOST: mq-service
+    volumes:
+      - api-data:/var/lib/api
+    restart: always
 
   redis:
     image: 'redis:alpine'
@@ -71,11 +73,13 @@ services:
     command: redis-server --requirepass sOmE_sEcUrE_pAsS
     ports:
       - 6379:6379
+    env_file:
+      - .env
     volumes:
       - redis-data:/var/lib/redis
       - redis.conf:/usr/local/etc/redis/redis.conf
     environment:
-      - REDIS_REPLICATION_MODE=master      
+      - REDIS_REPLICATION_MODE=master
 
 volumes:
   mariadb-data:

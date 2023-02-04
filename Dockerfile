@@ -1,17 +1,11 @@
-# This image caches dependencies for other containers
-# It allows to install them once and reuse later
-FROM node:14 AS node_base
+FROM node:16.15.0
 
-## Install deps
-FROM node_base as deps
 WORKDIR /usr/app
-COPY package.json yarn.lock ./
-RUN yarn install --frozen-lockfile && yarn cache clean
-
-## Run app for DEV env
-FROM node_base as build
-WORKDIR /usr/app
-COPY --from=deps /usr/app/node_modules /usr/app/node_modules
 COPY . .
-CMD yarn start
+RUN yarn install --frozen-lockfile && yarn cache clean
+RUN yarn add global pm2
+EXPOSE 80
 EXPOSE 3000
+EXPOSE 443
+
+CMD ["yarn", "start:docker"]

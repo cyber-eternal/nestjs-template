@@ -13,6 +13,7 @@ export class PingController {
   @ApiOperation({ summary: 'Ping' })
   @ApiOkResponse({ status: HttpStatus.OK, type: PingDto })
   public ping(): PingDto {
-    return new PingDto(this.configService.get<string>('app.version'));
+    const dto = new PingDto(this.configService.get<string>('app.version'));
+    return dto;
   }
 }
